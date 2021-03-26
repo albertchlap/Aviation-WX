@@ -21,6 +21,9 @@ const Button = styled.button`
   border-radius: 10px;
   border: none;
   transition: opacity 0.4s linear;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
   cursor: pointer;
   &:hover {
     opacity: 1;
@@ -30,11 +33,14 @@ const Button = styled.button`
 const Input = styled.input`
   width: 300px;
   height: 10px;
-  padding: 20px 5px;
+  padding: 20px;
   border-radius: 10px;
   outline: none;
   border: none;
   opacity: 0.7;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
 `;
 
 const SearchBar = ({ submitHandler }) => {
