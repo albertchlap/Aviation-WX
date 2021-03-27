@@ -46,15 +46,10 @@ const Title = styled.h1`
   background: none;
 `;
 
-const TOKEN = "nomE7jTacon8Qt_eboDH4LrKn1OQU0-nuByXV9eb6MQ";
 let latitude;
 let longitude;
 
 const App = () => {
-  const [aerodrome, setAerodrome] = useState([]);
-  const [metar, setMetar] = useState([]);
-  const [taf, setTaf] = useState([]);
-
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
       // console.log("Latitude is :", position.coords.latitude);
@@ -62,64 +57,11 @@ const App = () => {
     });
   }, []);
 
-  const submitHandler = query => {
-    const stationURL = `https://avwx.rest/api/station/${query}`;
-    const metarURL = `https://avwx.rest/api/metar/${query}`;
-    const tafURL = `https://avwx.rest/api/taf/${query}`;
-
-    const getAirport = axios.get(stationURL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    });
-    const getMetar = axios.get(metarURL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    });
-    const getTaf = axios.get(tafURL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    });
-    axios.all([getAirport, getMetar, getTaf]).then(
-      axios.spread((...allData) => {
-        setAerodrome(previous => [...previous, allData[0].data]);
-        setMetar(previous => [...previous, allData[1].data]);
-        setTaf(previous => [...previous, allData[2].data]);
-      })
-    );
-  };
-
-  useEffect(() => {
-    if (aerodrome.length !== 0) {
-      submitHandler();
-    }
-  }, []);
-
-  console.log(taf);
-
-  const deleteAirport = id => {
-    setAerodrome(previous => previous.filter(airport => airport.icao !== id));
-  };
-
   return (
     <Router>
       <Container>
         <Route path='/' exact component={Nearest} />
-        <Route
-          path='/custom'
-          exact
-          render={() => (
-            <Custom
-              aerodrome={aerodrome}
-              metar={metar}
-              taf={taf}
-              deleteAirport={deleteAirport}
-              submitHandler={submitHandler}
-            />
-          )}
-        />
+        <Route path='/custom' exact component={Custom} />
         <GlobalStyle img={Sky} />
         <Header />
         {/* <Title>Aviation Weather</Title> */}
