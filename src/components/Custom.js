@@ -54,7 +54,7 @@ const Custom = () => {
   };
 
   useEffect(() => {
-    if (aerodrome.length !== 0) {
+    if (aerodrome.length !== 0 && metar.length !== 0 && taf.length !== 0) {
       submitHandler();
     }
   }, []);

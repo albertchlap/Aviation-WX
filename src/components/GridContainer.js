@@ -10,7 +10,7 @@ const GridArea = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 30px;
-  margin: 100px 50px;
+  margin: 50px 50px;
   width: 80%;
 `;
 
@@ -61,8 +61,9 @@ const Selected = styled(motion.div)`
   border: none;
   border-radius: 10px;
   padding: 10px 30px;
-  background: #fff;
-  opacity: 0.7;
+  width: 80%;
+  background: #dcdcdc;
+
   z-index: 10 !important;
   cursor: pointer;
 `;
@@ -91,7 +92,7 @@ const Airport = styled(motion.h2)`
 
 const GridContainer = ({ aerodrome, deleteAirport, metar, taf }) => {
   const [index, setIndex] = useState(false);
-  console.log(metar);
+
   const animatedGridItems = (
     <AnimateSharedLayout type='crossfade'>
       {aerodrome.map((port, i) => {
@@ -103,7 +104,7 @@ const GridContainer = ({ aerodrome, deleteAirport, metar, taf }) => {
                 : null
             }
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 0.7 }}
             exit={{ opacity: 0 }}
             layoutId={aerodrome[i].icao}
             key={i}>
@@ -136,8 +137,16 @@ const GridContainer = ({ aerodrome, deleteAirport, metar, taf }) => {
               exit={{ opacity: 0 }}
               layoutId={aerodrome[index].icao}
               onClick={() => setIndex(false)}>
-              <motion.h5>{aerodrome[index].icao}</motion.h5>
-              <motion.h2>{aerodrome[index].name}</motion.h2>
+              <motion.h2>{aerodrome[index].icao}</motion.h2>
+              <motion.h4>{aerodrome[index].name}</motion.h4>
+              <motion.h5>
+                {aerodrome[index].city}, {aerodrome[index].country}
+              </motion.h5>
+
+              <motion.h4>METAR</motion.h4>
+              <motion.h3>{metar[index].raw}</motion.h3>
+              <motion.h4>TAF</motion.h4>
+              <motion.h3>{taf[index].raw}</motion.h3>
             </Selected>
           </SelectedContainer>
         )}
