@@ -89,15 +89,15 @@ const Airport = styled(motion.h2)`
   padding: 10px 40px;
 `;
 
-const GridContainer = ({ aerodrome, deleteAirport }) => {
+const GridContainer = ({ aerodrome, deleteAirport, metar, taf }) => {
   const [index, setIndex] = useState(false);
-
+  console.log(metar);
   const animatedGridItems = (
     <AnimateSharedLayout type='crossfade'>
       {aerodrome.map((port, i) => {
         return (
           <GridItem
-            // condition={port.flight_rules}
+            condition={metar.length === 0 ? null : metar[i].flight_rules}
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0 }}
