@@ -97,7 +97,11 @@ const GridContainer = ({ aerodrome, deleteAirport, metar, taf }) => {
       {aerodrome.map((port, i) => {
         return (
           <GridItem
-            condition={metar.length === 0 ? null : metar[i].flight_rules}
+            condition={
+              metar.length > i && metar.length !== 0
+                ? metar[i].flight_rules
+                : null
+            }
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0 }}
