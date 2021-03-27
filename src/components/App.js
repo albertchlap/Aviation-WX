@@ -57,8 +57,8 @@ const App = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(position => {
-      console.log("Latitude is :", position.coords.latitude);
-      console.log("Longitude is :", position.coords.longitude);
+      // console.log("Latitude is :", position.coords.latitude);
+      // console.log("Longitude is :", position.coords.longitude);
     });
   }, []);
 
@@ -84,25 +84,20 @@ const App = () => {
     });
     axios.all([getAirport, getMetar, getTaf]).then(
       axios.spread((...allData) => {
-        console.log(allData[0]);
-        console.log(allData[1]);
-        console.log(allData[2]);
+        setAerodrome(previous => [...previous, allData[0].data]);
+        setMetar(previous => [...previous, allData[1].data]);
+        setTaf(previous => [...previous, allData[2].data]);
       })
     );
-
-    // setAerodrome(previous => [...previous, stationRes.data]);
-    // setMetar(previous => [...previous, metarRes.data]);
-    // setTaf(previous => [...previous, tafRes.data]);
   };
 
-  if (aerodrome.length !== 0) {
-    submitHandler();
-  }
+  useEffect(() => {
+    if (aerodrome.length !== 0) {
+      submitHandler();
+    }
+  }, []);
 
-  console.log(aerodrome);
-  console.log(metar);
   console.log(taf);
-  console.log("render");
 
   const deleteAirport = id => {
     setAerodrome(previous => previous.filter(airport => airport.icao !== id));
@@ -118,6 +113,8 @@ const App = () => {
           render={() => (
             <Custom
               aerodrome={aerodrome}
+              metar={metar}
+              taf={taf}
               deleteAirport={deleteAirport}
               submitHandler={submitHandler}
             />

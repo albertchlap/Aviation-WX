@@ -16,12 +16,17 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const Custom = ({ aerodrome, deleteAirport, submitHandler }) => {
+const Custom = ({ aerodrome, deleteAirport, submitHandler, metar, taf }) => {
   return (
     <Container>
       <Title>Custom Search</Title>
       <SearchBar submitHandler={submitHandler} />
-      <GridContainer aerodrome={aerodrome} deleteAirport={deleteAirport} />
+      <GridContainer
+        aerodrome={aerodrome}
+        deleteAirport={deleteAirport}
+        metar={metar}
+        taf={taf}
+      />
     </Container>
   );
 };
