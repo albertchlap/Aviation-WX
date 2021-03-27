@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 const Search = styled.div`
   margin: 0 auto;
+  position: relative;
+  left: 40px;
 `;
 
 const Form = styled.form`

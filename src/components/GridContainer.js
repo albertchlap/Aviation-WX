@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  motion,
-  useMotionValue,
-  AnimatePresence,
-  AnimateSharedLayout,
-} from "framer-motion";
+import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import CloseIcon from "@material-ui/icons/Close";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 
@@ -32,7 +27,7 @@ const GridItem = styled(motion.div)`
       ? "red"
       : condition === "IFR"
       ? "orange"
-      : null};
+      : "white"};
   opacity: 0.3;
   position: relative;
   z-index: 5;
@@ -94,23 +89,24 @@ const Airport = styled(motion.h2)`
   padding: 10px 40px;
 `;
 
-const GridContainer = ({ metar, deleteAirport }) => {
+const GridContainer = ({ aerodrome, deleteAirport }) => {
   const [index, setIndex] = useState(false);
 
   const animatedGridItems = (
     <AnimateSharedLayout type='crossfade'>
-      {metar.map((airport, i) => {
+      {aerodrome.map((port, i) => {
         return (
           <GridItem
-            condition={airport.flight_rules}
+            // condition={port.flight_rules}
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.5 }}
             exit={{ opacity: 0 }}
-            layoutId={metar[i].station}
+            layoutId={aerodrome[i].icao}
             key={i}>
-            <Airport>{airport.station}</Airport>
+            <Airport>{port.icao}</Airport>
+            <motion.h4>{port.name}</motion.h4>
 
-            <StyledCloseIcon onClick={() => deleteAirport(airport.station)} />
+            <StyledCloseIcon onClick={() => deleteAirport(port.icao)} />
             <StyledCircle onClick={() => setIndex(i)} />
           </GridItem>
         );
@@ -130,14 +126,14 @@ const GridContainer = ({ metar, deleteAirport }) => {
         {index !== false && (
           <SelectedContainer>
             <Selected
-              key={metar[index].station}
+              key={aerodrome[index].icao}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              layoutId={metar[index].station}
+              layoutId={aerodrome[index].icao}
               onClick={() => setIndex(false)}>
-              <motion.h5>{metar[index].station}</motion.h5>
-              <motion.h2>{metar[index].raw}</motion.h2>
+              <motion.h5>{aerodrome[index].icao}</motion.h5>
+              <motion.h2>{aerodrome[index].name}</motion.h2>
             </Selected>
           </SelectedContainer>
         )}
