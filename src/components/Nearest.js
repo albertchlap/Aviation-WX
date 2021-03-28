@@ -40,12 +40,10 @@ const Nearest = () => {
       };
       getNearest();
     });
-  }, []);
-
-  console.log(nearest);
+  }, [nearest]);
 
   const deleteNearest = id => {
-    setNearest(previous => previous.filter(ident => ident.icao !== id));
+    setNearest(previous => previous.filter(ident => ident.station.icao !== id));
   };
 
   return (

@@ -24,6 +24,8 @@ const GridItem = styled(motion.div)`
   position: relative;
   z-index: 5;
   text-align: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const Overlay = styled(motion.div)`
@@ -84,8 +86,7 @@ const Airport = styled(motion.h2)`
 
 const NearestItems = ({ nearest, deleteNearest }) => {
   const [position, setPosition] = useState(false);
-  console.log(nearest);
-  console.log(position);
+
   return (
     <>
       <AnimateSharedLayout type='crossfade'>
