@@ -4,14 +4,19 @@ import styled from "styled-components";
 import GridContainer from "./GridContainer";
 import axios from "axios";
 
-const TOKEN = "nomE7jTacon8Qt_eboDH4LrKn1OQU0-nuByXV9eb6MQ";
+const TOKEN = process.env.REACT_APP_TOKEN;
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const Title = styled.h1`
   color: #fff;
   opacity: 0.7;
-  margin-top: 100px;
+  margin: 120px 0 50px;
+  width: 100%;
+  text-align: center;
 `;
 
 const Nearest = () => {
@@ -31,7 +36,7 @@ const Nearest = () => {
             },
           }
         );
-        setNearest(previous => [...previous, res.data]);
+        setNearest(res.data);
       };
       getNearest();
     });
@@ -39,10 +44,14 @@ const Nearest = () => {
 
   console.log(nearest);
 
+  const deleteNearest = id => {
+    setNearest(previous => previous.filter(ident => ident.icao !== id));
+  };
+
   return (
     <Container>
       <Title>Nearest Airports</Title>
-      <GridContainer nearest={nearest} />
+      <GridContainer nearest={nearest} deleteNearest={deleteNearest} />
     </Container>
   );
 };

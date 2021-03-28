@@ -12,13 +12,12 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 const Container = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
-  width: 100vw;
+
   position: relative;
   background: url(${Sky}) no-repeat center center/cover;
   &:before {
@@ -46,9 +45,6 @@ const Title = styled.h1`
   background: none;
 `;
 
-let latitude;
-let longitude;
-
 const App = () => {
   return (
     <Router>
@@ -57,8 +53,6 @@ const App = () => {
         <Route path='/custom' exact component={Custom} />
         <GlobalStyle img={Sky} />
         <Header />
-        {/* <Title>Aviation Weather</Title> */}
-        {/* <SearchBar submitHandler={submitHandler} /> */}
       </Container>
     </Router>
   );

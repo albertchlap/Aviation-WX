@@ -82,64 +82,54 @@ const Airport = styled(motion.h2)`
   padding: 10px 40px;
 `;
 
-const CustomItems = ({ aerodrome, deleteAirport, metar, taf }) => {
-  const [index, setIndex] = useState(false);
-  console.log(aerodrome);
+const NearestItems = ({ nearest, deleteNearest }) => {
+  const [position, setPosition] = useState(false);
+  console.log(nearest);
+  console.log(position);
   return (
     <>
       <AnimateSharedLayout type='crossfade'>
-        {aerodrome.map((port, i) => {
+        {nearest.map((airport, i) => {
           return (
             <GridItem
-              condition={
-                metar.length > i && metar.length !== 0
-                  ? metar[i].flight_rules
-                  : null
-              }
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.7 }}
               exit={{ opacity: 0 }}
-              layoutId={port.icao}
+              layoutId={airport.station.icao}
               key={i}>
-              <Airport>{port.icao}</Airport>
-              <motion.h4>{port.name}</motion.h4>
+              <Airport>{airport.station.icao}</Airport>
+              <motion.h4>{airport.station.name}</motion.h4>
 
-              <StyledCloseIcon onClick={() => deleteAirport(port.icao)} />
-              <StyledCircle onClick={() => setIndex(i)} />
+              <StyledCloseIcon
+                onClick={() => deleteNearest(airport.station.icao)}
+              />
+              <StyledCircle onClick={() => setPosition(i)} />
             </GridItem>
           );
         })}
 
         <AnimatePresence>
-          {index !== false && (
+          {position !== false && (
             <Overlay
               key='overlay'
               initial={{ opacity: 0 }}
               animate={{ opacity: 0.6 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIndex(false)}
+              onClick={() => setPosition(false)}
             />
           )}
 
-          {index !== false && (
+          {position !== false && (
             <SelectedContainer>
               <Selected
-                key={aerodrome[index].icao}
+                key={nearest[position].station.icao}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                layoutId={aerodrome[index].icao}
-                onClick={() => setIndex(false)}>
-                <motion.h2>{aerodrome[index].icao}</motion.h2>
-                <motion.h4>{aerodrome[index].name}</motion.h4>
-                <motion.h5>
-                  {aerodrome[index].city}, {aerodrome[index].country}
-                </motion.h5>
-
-                <motion.h4>METAR</motion.h4>
-                <motion.h3>{metar[index].raw}</motion.h3>
-                <motion.h4>TAF</motion.h4>
-                <motion.h3>{taf[index].raw}</motion.h3>
+                layoutId={nearest[position].station.icao}
+                onClick={() => setPosition(false)}>
+                <motion.h2>{nearest[position].station.icao}</motion.h2>
+                <motion.h4>{nearest[position].station.name}</motion.h4>
               </Selected>
             </SelectedContainer>
           )}
@@ -149,4 +139,4 @@ const CustomItems = ({ aerodrome, deleteAirport, metar, taf }) => {
   );
 };
 
-export default CustomItems;
+export default NearestItems;

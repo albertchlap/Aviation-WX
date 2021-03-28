@@ -17,7 +17,7 @@ const Title = styled.h1`
   text-align: center;
 `;
 
-const TOKEN = "nomE7jTacon8Qt_eboDH4LrKn1OQU0-nuByXV9eb6MQ";
+const TOKEN = process.env.REACT_APP_TOKEN;
 
 const Custom = () => {
   const [aerodrome, setAerodrome] = useState([]);

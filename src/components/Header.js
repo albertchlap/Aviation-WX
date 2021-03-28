@@ -31,6 +31,11 @@ const ListItems = styled.ul`
   list-style: none;
   display: flex;
   padding-right: 40px;
+  @media screen and (max-width: 768px) {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+  }
 `;
 
 const Items = styled.li`
