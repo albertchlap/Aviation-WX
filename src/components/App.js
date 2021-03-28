@@ -50,13 +50,6 @@ let latitude;
 let longitude;
 
 const App = () => {
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(position => {
-      // console.log("Latitude is :", position.coords.latitude);
-      // console.log("Longitude is :", position.coords.longitude);
-    });
-  }, []);
-
   return (
     <Router>
       <Container>

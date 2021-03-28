@@ -90,9 +90,9 @@ const Airport = styled(motion.h2)`
   padding: 10px 40px;
 `;
 
-const GridContainer = ({ aerodrome, deleteAirport, metar, taf }) => {
+const GridContainer = ({ aerodrome, deleteAirport, metar, taf, nearest }) => {
   const [index, setIndex] = useState(false);
-
+  console.log(metar, taf);
   const animatedGridItems = (
     <AnimateSharedLayout type='crossfade'>
       {aerodrome.map((port, i) => {

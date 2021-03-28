@@ -61,6 +61,8 @@ const Custom = () => {
 
   const deleteAirport = id => {
     setAerodrome(previous => previous.filter(airport => airport.icao !== id));
+    setMetar(previous => previous.filter(wx => wx.station !== id));
+    setTaf(previous => previous.filter(forecast => forecast.station !== id));
   };
 
   return (
