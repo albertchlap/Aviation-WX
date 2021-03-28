@@ -7,8 +7,10 @@ import NearestItems from "./NearestItems";
 const GridArea = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  justify-content: center;
+  align-items: center;
   grid-gap: 30px;
-  margin: 50px auto;
+  margin: 50px auto !important;
   width: 80%;
   @media screen and (max-width: 1100px) {
     grid-template-columns: repeat(4, 1fr);
@@ -22,7 +24,6 @@ const GridArea = styled.div`
   @media screen and (max-width: 500px) {
     width: 95%;
     margin: 50px auto !important;
-    transform: translateX(-5px);
   }
 `;
 
