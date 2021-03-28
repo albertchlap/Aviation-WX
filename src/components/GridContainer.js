@@ -19,6 +19,10 @@ const GridArea = styled.div`
   @media screen and (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
   }
+  @media screen and (max-width: 500px) {
+    width: 95%;
+    margin: 50px auto !important;
+  }
 `;
 
 const GridContainer = ({
