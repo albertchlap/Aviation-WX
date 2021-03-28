@@ -30,7 +30,7 @@ const GridContainer = ({
   deleteNearest,
 }) => {
   const items =
-    window.location.href === "http://localhost:3000/" ? (
+    window.location.href === "https://serene-neumann-de1690.netlify.app/" ? (
       <NearestItems nearest={nearest} deleteNearest={deleteNearest} />
     ) : (
       <CustomItems
