@@ -11,6 +11,10 @@ const Search = styled.div`
 const Form = styled.form`
   margin: 0 auto;
   text-align: center;
+  @media screen and (max-width: 650px) {
+    position: relative;
+    right: 40px;
+  }
 `;
 
 const Button = styled.button`
@@ -29,6 +33,10 @@ const Button = styled.button`
   cursor: pointer;
   &:hover {
     opacity: 1;
+  }
+  @media screen and (max-width: 650px) {
+    display: block;
+    margin: 40px auto 60px;
   }
 `;
 

@@ -17,6 +17,9 @@ const Title = styled.h1`
   margin: 120px 0 50px;
   width: 100%;
   text-align: center;
+  @media screen and (max-width: 500px) {
+    padding-top: 40px;
+  }
 `;
 
 const Nearest = () => {

@@ -9,15 +9,16 @@ const Nav = styled.header`
   height: 70px;
   background: transparent;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    justify-content: center;
+  }
 `;
 
 const HeaderTitle = styled.h2`
-  position: absolute;
-  left: 10px;
-  top: -10px;
   color: #fff;
   opacity: 0.7;
   font-family: "Anton", "sans-serif";
@@ -25,16 +26,19 @@ const HeaderTitle = styled.h2`
   letter-spacing: 2px;
   border: 5px solid #fff;
   padding: 5px;
+  margin: 10px 0 0 10px;
+  @media screen and (max-width: 500px) {
+    margin: 140px 0 20px;
+  }
 `;
 
 const ListItems = styled.ul`
   list-style: none;
   display: flex;
   padding-right: 40px;
-  @media screen and (max-width: 768px) {
-    position: absolute;
-    right: 5px;
-    top: 10px;
+  @media screen and (max-width: 500px) {
+    padding-bottom: 80px;
+    margin-top: -10px;
   }
 `;
 
