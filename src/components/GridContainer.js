@@ -27,24 +27,12 @@ const GridArea = styled.div`
   }
 `;
 
-const GridContainer = ({
-  aerodrome,
-  deleteAirport,
-  metar,
-  taf,
-  nearest,
-  deleteNearest,
-}) => {
+const GridContainer = ({ ident, deleteAirport, nearest, deleteNearest }) => {
   const items =
-    window.location.href === "https://serene-neumann-de1690.netlify.app/" ? (
+    window.location.pathname === "/" ? (
       <NearestItems nearest={nearest} deleteNearest={deleteNearest} />
     ) : (
-      <CustomItems
-        aerodrome={aerodrome}
-        deleteAirport={deleteAirport}
-        metar={metar}
-        taf={taf}
-      />
+      <CustomItems deleteAirport={deleteAirport} ident={ident} />
     );
 
   return <GridArea>{items}</GridArea>;

@@ -53,12 +53,11 @@ const Input = styled.input`
   letter-spacing: 1.5px;
 `;
 
-const SearchBar = ({ submitHandler }) => {
+const SearchBar = ({ setIdent }) => {
   const [input, setInput] = useState("");
-
   const onSubmitHandler = e => {
     e.preventDefault();
-    submitHandler(input);
+    setIdent(input);
     setInput("");
   };
 

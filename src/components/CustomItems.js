@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styled from "styled-components";
 
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import CloseIcon from "@material-ui/icons/Close";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
+import axios from "axios";
 
 const GridItem = styled(motion.div)`
   border: none;
+  height: 180px;
   border-radius: 10px;
   padding: 10px;
   background: ${({ condition }) =>
@@ -82,9 +84,46 @@ const Airport = styled(motion.h2)`
   padding: 10px 40px;
 `;
 
-const CustomItems = ({ aerodrome, deleteAirport, metar, taf }) => {
+const TOKEN = process.env.REACT_APP_TOKEN;
+
+const CustomItems = ({ ident, deleteAirport }) => {
   const [index, setIndex] = useState(false);
-  console.log(aerodrome);
+  const [aerodrome, setAerodrome] = useState([]);
+  const [metar, setMetar] = useState([]);
+  const [taf, setTaf] = useState([]);
+
+  useEffect(() => {
+    if (!ident) {
+      return;
+    }
+    const stationURL = `https://avwx.rest/api/station/${ident}`;
+    const metarURL = `https://avwx.rest/api/metar/${ident}`;
+    const tafURL = `https://avwx.rest/api/taf/${ident}`;
+
+    const getAirport = axios.get(stationURL, {
+      headers: {
+        Authorization: TOKEN,
+      },
+    });
+    const getMetar = axios.get(metarURL, {
+      headers: {
+        Authorization: TOKEN,
+      },
+    });
+    const getTaf = axios.get(tafURL, {
+      headers: {
+        Authorization: TOKEN,
+      },
+    });
+    axios.all([getAirport, getMetar, getTaf]).then(
+      axios.spread((...allData) => {
+        setAerodrome(previous => [...previous, allData[0].data]);
+        setMetar(previous => [...previous, allData[1].data]);
+        setTaf(previous => [...previous, allData[2].data]);
+      })
+    );
+  }, [ident]);
+
   return (
     <>
       <AnimateSharedLayout type='crossfade'>
