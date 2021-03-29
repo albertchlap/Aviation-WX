@@ -43,7 +43,7 @@ const Nearest = () => {
       };
       getNearest();
     });
-  }, [nearest]);
+  }, []);
 
   const deleteNearest = id => {
     setNearest(previous => previous.filter(ident => ident.station.icao !== id));

@@ -60,7 +60,7 @@ const Custom = () => {
     if (aerodrome.length !== 0 && metar.length !== 0 && taf.length !== 0) {
       submitHandler();
     }
-  }, [aerodrome, taf, metar]);
+  }, [aerodrome.length, taf.length, metar.length]);
 
   const deleteAirport = id => {
     setAerodrome(previous => previous.filter(airport => airport.icao !== id));
