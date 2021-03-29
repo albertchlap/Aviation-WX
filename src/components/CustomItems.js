@@ -26,6 +26,8 @@ const GridItem = styled(motion.div)`
   position: relative;
   z-index: 5;
   text-align: center;
+  width: 100%;
+  object-fit: contain;
 `;
 
 const Overlay = styled(motion.div)`
@@ -86,7 +88,7 @@ const Airport = styled(motion.h2)`
 
 const TOKEN = process.env.REACT_APP_TOKEN;
 
-const CustomItems = ({ ident, deleteAirport }) => {
+const CustomItems = ({ ident }) => {
   const [index, setIndex] = useState(false);
   const [aerodrome, setAerodrome] = useState([]);
   const [metar, setMetar] = useState([]);
@@ -123,6 +125,12 @@ const CustomItems = ({ ident, deleteAirport }) => {
       })
     );
   }, [ident]);
+
+  const deleteAirport = id => {
+    setAerodrome(previous => previous.filter(airport => airport.icao !== id));
+    setMetar(previous => previous.filter(wx => wx.station !== id));
+    setTaf(previous => previous.filter(forecast => forecast.station !== id));
+  };
 
   return (
     <>

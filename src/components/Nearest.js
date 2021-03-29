@@ -46,7 +46,8 @@ const Nearest = () => {
   }, []);
 
   const deleteNearest = id => {
-    setNearest(previous => previous.filter(ident => ident.station.icao !== id));
+    const newNearest = nearest.filter(ident => ident.station.icao !== id);
+    setNearest(newNearest);
   };
 
   return (

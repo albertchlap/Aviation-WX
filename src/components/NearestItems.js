@@ -102,6 +102,7 @@ const NearestItems = ({ nearest, deleteNearest }) => {
               <motion.h4>{airport.station.name}</motion.h4>
 
               <StyledCloseIcon
+                style={{ visibility: "hidden" }}
                 onClick={() => deleteNearest(airport.station.icao)}
               />
               <StyledCircle onClick={() => setPosition(i)} />

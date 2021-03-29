@@ -9,7 +9,7 @@ const GridArea = styled.div`
   grid-template-columns: repeat(5, 1fr);
   justify-content: center;
   align-items: center;
-  grid-gap: 30px;
+  grid-gap: 10px;
   margin: 50px auto !important;
   width: 80%;
   @media screen and (max-width: 1100px) {
