@@ -97,14 +97,7 @@ const NearestItems = ({ nearest, deleteNearest }) => {
                   layoutId={aerodrome[position].icao}
                   onClick={() => setPosition(false)}>
                   <motion.h2>{aerodrome[position].icao}</motion.h2>
-                  <motion.div
-                    style={{
-                      position: "absolute",
-                      right: "25px",
-                      top: "15px",
-                    }}>
-                    <Zulu />
-                  </motion.div>
+
                   <motion.h4>{aerodrome[position].name}</motion.h4>
                   <motion.h5>
                     {aerodrome[position].city}, {aerodrome[position].country}
@@ -114,6 +107,9 @@ const NearestItems = ({ nearest, deleteNearest }) => {
                   <motion.h3>{metar[position].raw}</motion.h3>
                   <motion.h4>TAF</motion.h4>
                   <motion.h3>{taf[position].raw}</motion.h3>
+                  <ZuluContainer>
+                    <Zulu />
+                  </ZuluContainer>
                 </Selected>
               </SelectedContainer>
             )}
@@ -190,6 +186,13 @@ const SpinnerContainer = styled.div`
   @media screen and (max-width: 500px) {
     left: 35%;
   }
+`;
+
+const ZuluContainer = styled(motion.div)`
+  margin-top: 30px;
+  /* position: absolute;
+  top: 15px;
+  right: 25px; */
 `;
 
 // const StyledCloseIcon = styled(CloseIcon)`
