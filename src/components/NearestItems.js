@@ -188,7 +188,7 @@ const SpinnerContainer = styled.div`
   left: 47%;
   top: 50%;
   @media screen and (max-width: 500px) {
-    left: 35%;
+    left: 42%;
   }
 `;
 
