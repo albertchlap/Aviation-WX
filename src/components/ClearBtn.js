@@ -2,8 +2,26 @@ import React from "react";
 
 import styled from "styled-components";
 
-const ClearBtn = ({ clearResults }) => {
-  return <Button>Clear Results</Button>;
+const ClearBtn = ({
+  clearResults,
+  metar,
+  taf,
+  aerodrome,
+  setMetar,
+  setTaf,
+  setAerodrome,
+}) => {
+  const clearAirports = () => {
+    setAerodrome([]);
+    setMetar([]);
+    setTaf([]);
+  };
+
+  return (
+    <Button hidden={aerodrome.length === 0} onClick={clearAirports}>
+      Clear Results
+    </Button>
+  );
 };
 
 export default ClearBtn;

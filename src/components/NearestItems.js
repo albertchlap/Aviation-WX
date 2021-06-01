@@ -104,9 +104,13 @@ const NearestItems = ({ nearest, clearResults }) => {
                   </motion.h5>
 
                   <motion.h4>METAR</motion.h4>
-                  <motion.h3>{metar[position].raw}</motion.h3>
+                  <motion.h3 style={{ color: "#333" }}>
+                    {metar[position].raw}
+                  </motion.h3>
                   <motion.h4>TAF</motion.h4>
-                  <motion.h3>{taf[position].raw}</motion.h3>
+                  <motion.h3 style={{ color: "#333" }}>
+                    {taf[position].raw}
+                  </motion.h3>
                   <ZuluContainer>
                     <Zulu />
                   </ZuluContainer>

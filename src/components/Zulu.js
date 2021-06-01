@@ -133,14 +133,12 @@ const Zulu = () => {
       break;
   }
 
-  console.log(day);
-
   return (
     <div>
-      <h4 style={{ fontStyle: "italic" }}>
+      <h4 style={{ fontStyle: "italic", color: "navy" }}>
         Local Time: {`${day} ${month} ${year} ${hours}:${minutes}:${seconds}`}
       </h4>
-      <h4 style={{ fontStyle: "italic" }}>
+      <h4 style={{ fontStyle: "italic", color: "navy" }}>
         Zulu Time:{" "}
         {`${dayUTC} ${monthUTC} ${yearUTC} ${hoursUTC}:${minutesUTC}:${secondsUTC}Z`}
       </h4>

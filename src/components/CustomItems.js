@@ -1,61 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import styled from "styled-components";
 
 import Zulu from "./Zulu";
 
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
-import CloseIcon from "@material-ui/icons/Close";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import axios from "axios";
-import Provider from "./Provider";
-import SearchBar from "./SearchBar";
-import ClearBtn from "./ClearBtn";
 
-const TOKEN = process.env.REACT_APP_TOKEN;
-
-const CustomItems = ({ ident }) => {
+const CustomItems = ({ metar, taf, aerodrome }) => {
   const [index, setIndex] = useState(false);
-  const [aerodrome, setAerodrome] = useState([]);
-  const [metar, setMetar] = useState([]);
-  const [taf, setTaf] = useState([]);
-
-  useEffect(() => {
-    if (!ident) {
-      return;
-    }
-    const stationURL = `https://avwx.rest/api/station/${ident}`;
-    const metarURL = `https://avwx.rest/api/metar/${ident}`;
-    const tafURL = `https://avwx.rest/api/taf/${ident}`;
-
-    const getAirport = axios.get(stationURL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    });
-    const getMetar = axios.get(metarURL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    });
-    const getTaf = axios.get(tafURL, {
-      headers: {
-        Authorization: TOKEN,
-      },
-    });
-    axios.all([getAirport, getMetar, getTaf]).then(
-      axios.spread((...allData) => {
-        setAerodrome(previous => [...previous, allData[0].data]);
-        setMetar(previous => [...previous, allData[1].data]);
-        setTaf(previous => [...previous, allData[2].data]);
-      })
-    );
-  }, [ident]);
 
   return (
     <>
       <AnimateSharedLayout type='crossfade'>
-        {aerodrome.map((port, i) => {
+        {aerodrome?.map((port, i) => {
           return (
             <GridItem
               condition={
@@ -101,9 +58,13 @@ const CustomItems = ({ ident }) => {
                   {aerodrome[index].city}, {aerodrome[index].country}
                 </motion.h5>
                 <motion.h4>METAR</motion.h4>
-                <motion.h3>{metar[index].raw}</motion.h3>
+                <motion.h3 style={{ color: "#333" }}>
+                  {metar[index].raw}
+                </motion.h3>
                 <motion.h4>TAF</motion.h4>
-                <motion.h3>{taf[index].raw}</motion.h3>
+                <motion.h3 style={{ color: "#333" }}>
+                  {taf[index].raw}
+                </motion.h3>
                 <ZuluContainer>
                   <Zulu />
                 </ZuluContainer>
@@ -174,24 +135,6 @@ const Selected = styled(motion.div)`
   position: relative;
   z-index: 10 !important;
   cursor: pointer;
-`;
-
-const StyledCloseIcon = styled(CloseIcon)`
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  font-size: 30px !important;
-  cursor: pointer;
-  z-index: 15 !important;
-`;
-
-const StyledCircle = styled(AddCircleIcon)`
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-  font-size: 30px !important;
-  cursor: pointer;
-  z-index: 15;
 `;
 
 const Airport = styled(motion.h2)`

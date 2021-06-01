@@ -3,7 +3,15 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import ClearBtn from "./ClearBtn";
 
-const SearchBar = ({ setIdent }) => {
+const SearchBar = ({
+  setIdent,
+  metar,
+  taf,
+  aerodrome,
+  setMetar,
+  setTaf,
+  setAerodrome,
+}) => {
   const [input, setInput] = useState("");
   const onSubmitHandler = e => {
     e.preventDefault();
@@ -20,8 +28,16 @@ const SearchBar = ({ setIdent }) => {
           value={input}
         />
         <BtnContainer>
-          <Button>Search</Button>
-          <ClearBtn />
+          <Button disabled={input.length !== 4}>Search</Button>
+          <ClearBtn
+            setIdent={setIdent}
+            aerodrome={aerodrome}
+            metar={metar}
+            taf={taf}
+            setAerodrome={setAerodrome}
+            setMetar={setMetar}
+            setTaf={setTaf}
+          />
         </BtnContainer>
       </Form>
     </Search>

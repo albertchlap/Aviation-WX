@@ -4,12 +4,32 @@ import styled from "styled-components";
 import CustomItems from "./CustomItems";
 import NearestItems from "./NearestItems";
 
-const GridContainer = ({ ident, deleteAirport, nearest, deleteNearest }) => {
+const GridContainer = ({
+  ident,
+  deleteAirport,
+  nearest,
+  deleteNearest,
+  aerodrome,
+  metar,
+  taf,
+  setAerodrome,
+  setMetar,
+  setTaf,
+}) => {
   const items =
     window.location.pathname === "/" ? (
       <NearestItems nearest={nearest} deleteNearest={deleteNearest} />
     ) : (
-      <CustomItems deleteAirport={deleteAirport} ident={ident} />
+      <CustomItems
+        deleteAirport={deleteAirport}
+        ident={ident}
+        aerodrome={aerodrome}
+        metar={metar}
+        taf={taf}
+        setAerodrome={setAerodrome}
+        setMetar={setMetar}
+        setTaf={setTaf}
+      />
     );
 
   return <GridArea>{items}</GridArea>;
