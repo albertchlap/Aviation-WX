@@ -4,6 +4,19 @@ import styled from "styled-components";
 import CustomItems from "./CustomItems";
 import NearestItems from "./NearestItems";
 
+const GridContainer = ({ ident, deleteAirport, nearest, deleteNearest }) => {
+  const items =
+    window.location.pathname === "/" ? (
+      <NearestItems nearest={nearest} deleteNearest={deleteNearest} />
+    ) : (
+      <CustomItems deleteAirport={deleteAirport} ident={ident} />
+    );
+
+  return <GridArea>{items}</GridArea>;
+};
+
+export default GridContainer;
+
 const GridArea = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -26,16 +39,3 @@ const GridArea = styled.div`
     margin: 50px auto !important;
   }
 `;
-
-const GridContainer = ({ ident, deleteAirport, nearest, deleteNearest }) => {
-  const items =
-    window.location.pathname === "/" ? (
-      <NearestItems nearest={nearest} deleteNearest={deleteNearest} />
-    ) : (
-      <CustomItems deleteAirport={deleteAirport} ident={ident} />
-    );
-
-  return <GridArea>{items}</GridArea>;
-};
-
-export default GridContainer;

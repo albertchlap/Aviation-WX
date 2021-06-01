@@ -9,7 +9,7 @@ import Zulu from "./Zulu";
 
 const TOKEN = process.env.REACT_APP_TOKEN;
 
-const NearestItems = ({ nearest, deleteNearest }) => {
+const NearestItems = ({ nearest, clearResults }) => {
   const [position, setPosition] = useState(false);
   const [aerodrome, setAerodrome] = useState([]);
   const [metar, setMetar] = useState([]);

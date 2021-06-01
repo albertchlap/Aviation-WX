@@ -8,6 +8,9 @@ import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import CloseIcon from "@material-ui/icons/Close";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import axios from "axios";
+import Provider from "./Provider";
+import SearchBar from "./SearchBar";
+import ClearBtn from "./ClearBtn";
 
 const TOKEN = process.env.REACT_APP_TOKEN;
 
@@ -49,12 +52,6 @@ const CustomItems = ({ ident }) => {
     );
   }, [ident]);
 
-  const deleteAirport = id => {
-    setAerodrome(previous => previous.filter(airport => airport.icao !== id));
-    setMetar(previous => previous.filter(wx => wx.station !== id));
-    setTaf(previous => previous.filter(forecast => forecast.station !== id));
-  };
-
   return (
     <>
       <AnimateSharedLayout type='crossfade'>
@@ -74,9 +71,6 @@ const CustomItems = ({ ident }) => {
               onClick={() => setIndex(i)}>
               <Airport>{port.icao}</Airport>
               <motion.h4>{port.name}</motion.h4>
-
-              <StyledCloseIcon onClick={() => deleteAirport(port.icao)} />
-              <StyledCircle />
             </GridItem>
           );
         })}
@@ -102,14 +96,6 @@ const CustomItems = ({ ident }) => {
                 layoutId={aerodrome[index].icao}
                 onClick={() => setIndex(false)}>
                 <motion.h2>{aerodrome[index].icao}</motion.h2>
-                <motion.div
-                  style={{
-                    position: "absolute",
-                    right: "25px",
-                    top: "15px",
-                  }}>
-                  <Zulu />
-                </motion.div>
                 <motion.h4>{aerodrome[index].name}</motion.h4>
                 <motion.h5>
                   {aerodrome[index].city}, {aerodrome[index].country}
@@ -118,6 +104,9 @@ const CustomItems = ({ ident }) => {
                 <motion.h3>{metar[index].raw}</motion.h3>
                 <motion.h4>TAF</motion.h4>
                 <motion.h3>{taf[index].raw}</motion.h3>
+                <ZuluContainer>
+                  <Zulu />
+                </ZuluContainer>
               </Selected>
             </SelectedContainer>
           )}
@@ -150,6 +139,7 @@ const GridItem = styled(motion.div)`
   text-align: center;
   width: 100%;
   object-fit: contain;
+  cursor: pointer;
 `;
 
 const Overlay = styled(motion.div)`
@@ -206,4 +196,11 @@ const StyledCircle = styled(AddCircleIcon)`
 
 const Airport = styled(motion.h2)`
   padding: 10px 40px;
+`;
+
+const ZuluContainer = styled(motion.div)`
+  margin-top: 30px;
+  /* position: absolute;
+  top: 15px;
+  right: 25px; */
 `;
